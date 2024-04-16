@@ -1,0 +1,32 @@
+﻿@page
+@model Aluno
+@{
+    ViewData["Title"] = "Alunos";
+}
+
+<h1>Alunos</h1>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Usuário</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model != null && Model.Alunos.Any())
+            {
+                foreach (var aluno in Model.Alunos)
+                {
+                    <tr>
+                        <th scope="row">@aluno.Id</th>
+                        <th scope="row">@aluno.Nome</th>
+                        <th scope="row">@aluno.Usuario</th>
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+

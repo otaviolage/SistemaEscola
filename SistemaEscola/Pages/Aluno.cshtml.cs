@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaEscola.Domain.Interfaces.Applications;
 
 namespace SistemaEscola.Pages
@@ -16,6 +17,16 @@ namespace SistemaEscola.Pages
         public async Task OnGet()
         {
             Alunos = await _alunoApplication.GetAll();
+        }
+
+        public async Task<IActionResult> OnPostInativarAsync(int id)
+        {
+            var hasCreated = await _alunoApplication.Delete(id);
+
+            if (!hasCreated)
+                return RedirectToPage("/ErroRequisicao");
+
+            return RedirectToPage();
         }
     }
 }

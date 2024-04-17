@@ -43,7 +43,7 @@
 
 <div class="container">
     <div style="margin-bottom: 20px;">
-        <a class="btn btn-primary" role="button">Novo Aluno</a>
+        <a class="btn btn-primary" role="button" asp-page="/CriarAluno">Novo Aluno</a>
     </div>
 
     <h1>Alunos</h1>
@@ -54,6 +54,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Usuário</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -65,10 +66,14 @@
                         <td>@aluno.Id</td>
                         <td>@aluno.Nome</td>
                         <td>@aluno.Usuario</td>
+                        <td>
+                            <form method="post" asp-page-handler="Inativar" asp-route-id="@aluno.Id">
+                                <button type="submit" class="btn btn-danger">Inativar</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
 </div>
-

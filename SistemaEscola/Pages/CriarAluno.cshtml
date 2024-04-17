@@ -1,0 +1,56 @@
+﻿@page
+@model CriarAluno
+@{
+    ViewData["Title"] = "AlunosCriar";
+}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-primary" role="button" asp-page="/Aluno">Voltar</a>
+    </div>
+
+    <h1>Criar Aluno</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="CriarAluno.Nome" name="nome" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="usuario">Usuário:</label>
+            <input type="text" id="CriarAluno.Usuario" name="usuario" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="CriarAluno.Senha" name="senha" class="form-control" />
+            <small id="senhaHelp" class="form-text text-muted">A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.</small>
+        </div>
+        <button type="submit" class="btn btn-primary" asp-page-handler="OnGet">Cadastrar</button>
+    </form>
+</div>
+

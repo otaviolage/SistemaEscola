@@ -46,6 +46,22 @@ namespace SistemaEscola.Infrastructure.Context
             return await db.QueryAsync<T>(commandDefinition);
         }
 
+        public async Task<bool> ExecuteAsync(string sql, DynamicParameters parameters = null, CommandType commandType = CommandType.Text)
+        {
+            using var db = GetDbconnection();
+            var commandDefinition = new CommandDefinition(sql, parameters, commandType: commandType, commandTimeout: _commandTimeout);
+
+            try
+            {
+                int rowsAffected = await db.ExecuteAsync(commandDefinition);
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public DbConnection GetDbconnection()
         {
             return new SqlConnection(_config.GetConnectionString(_connectionString));

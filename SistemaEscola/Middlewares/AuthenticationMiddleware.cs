@@ -1,30 +1,37 @@
-﻿using SistemaEscola.Domain.Enums;
+﻿using Microsoft.IdentityModel.Tokens;
+using SistemaEscola.Domain.Enums;
 using SistemaEscola.Domain.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace SistemaEscola.Middlewares
 {
     public class AuthenticationMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly string _tokenAuth;
-
+        private readonly string _authUser;
+        private readonly string _authSecret;
+        private readonly string _authIss;
+        private readonly string _authAud;
 
         public AuthenticationMiddleware(
             RequestDelegate next,
             IConfiguration configuration)
         {
             _next = next;
-            _tokenAuth = configuration["TokenAuth:Secret"]!;
-
+            _authUser = configuration["Auth:User"]!;
+            _authSecret = configuration["Auth:Secret"]!;
+            _authIss = configuration["Auth:Iss"]!;
+            _authAud = configuration["Auth:Aud"]!;
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
             try
             {
-                ValidateToken(httpContext);
-
+                if (((string)httpContext.Request.Path).StartsWith("/api"))
+                    ValidateToken(httpContext);
             }
             catch (ErrorException ex)
             {
@@ -39,32 +46,34 @@ namespace SistemaEscola.Middlewares
 
         public void ValidateToken(HttpContext httpContext)
         {
-            var authorization = httpContext.Request.Headers["Authorization"].ToString();
+            var authorization = httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            if (!string.IsNullOrEmpty(authorization))
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_authSecret);
 
-            if (string.IsNullOrWhiteSpace(authorization))
+                try
+                {
+                    tokenHandler.ValidateToken(authorization, new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = true,
+                        ValidIssuer = _authIss,
+                        ValidateAudience = true,
+                        ValidAudience = _authAud,
+                        ValidateLifetime = true
+                    }, out SecurityToken validatedToken);
+                }
+                catch (SecurityTokenException)
+                {
+                    throw new ErrorException(ErrorCode.Unauthorized, "Unauthorized");
+                }
+            }
+            else
+            {
                 throw new ErrorException(ErrorCode.Unauthorized, "Unauthorized");
 
-            var token = authorization[authorization.IndexOf(" ")..].Trim();
-            var handler = new JwtSecurityTokenHandler();
-
-            try
-            {
-                var jsonToken = handler.ReadJwtToken(token);
-                if (string.IsNullOrWhiteSpace(jsonToken.Issuer))
-                    throw new ErrorException(ErrorCode.Unauthorized, "Unauthorized");
-
-                var secretClaim = jsonToken.Claims.FirstOrDefault(c => c.Type == "secret")?.Value;
-
-                if (secretClaim == null)
-                    throw new ErrorException(ErrorCode.Unauthorized, "Unauthorized");
-
-                if (secretClaim != _tokenAuth)
-                    throw new ErrorException(ErrorCode.Unauthorized, "Invalid User");
-
-            }
-            catch (Exception)
-            {
-                throw new ErrorException(ErrorCode.Unauthorized, "Invalid token");
             }
         }
     }

@@ -4,7 +4,49 @@
     ViewData["Title"] = "Alunos";
 }
 
-<h1>Alunos</h1>
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+</style>
+
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-primary" role="button">Novo Aluno</a>
+    </div>
+
+    <h1>Alunos</h1>
 
     <table class="table">
         <thead class="thead-dark">
@@ -15,18 +57,18 @@
             </tr>
         </thead>
         <tbody>
-        @if (Model != null && Model.Alunos.Any())
+            @if (Model != null && Model.Alunos.Any())
             {
                 foreach (var aluno in Model.Alunos)
                 {
                     <tr>
-                        <th scope="row">@aluno.Id</th>
-                        <th scope="row">@aluno.Nome</th>
-                        <th scope="row">@aluno.Usuario</th>
+                        <td>@aluno.Id</td>
+                        <td>@aluno.Nome</td>
+                        <td>@aluno.Usuario</td>
                     </tr>
-
                 }
             }
         </tbody>
     </table>
+</div>
 

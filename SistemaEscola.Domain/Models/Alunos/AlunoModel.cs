@@ -7,7 +7,6 @@ namespace SistemaEscola.Domain.Models.Alunos
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Usuario { get; set; }
-        public char Senha { get; set; }
 
         public static AlunoModel Create(AlunoDTO aluno) =>
             new()

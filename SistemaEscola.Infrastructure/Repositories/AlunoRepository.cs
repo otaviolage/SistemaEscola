@@ -15,7 +15,7 @@ namespace SistemaEscola.Infrastructure.Repositories
 
         public async Task<IEnumerable<AlunoDTO>> GetAll()
         {
-            string query = @$"SELECT * FROM Aluno";
+            string query = @$"SELECT Id, Nome, Usuario FROM Aluno";
 
             return await _dataContext.GetAllAsync<AlunoDTO>(query, default, System.Data.CommandType.Text);
         }

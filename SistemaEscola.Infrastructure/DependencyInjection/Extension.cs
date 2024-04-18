@@ -13,6 +13,7 @@ namespace SistemaEscola.Infrastructure.DependencyInjection
             services.AddScoped<IDataContext, DataContext>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<ITurmaRepository, TurmaRepository>();
+            services.AddScoped<IAlunoTurmaRepository, AlunoTurmaRepository>();
 
             return services;
         }

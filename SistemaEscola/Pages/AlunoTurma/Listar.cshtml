@@ -1,0 +1,42 @@
+﻿@page "{turmaId:int}"
+@model AlunoTurma
+@{
+    var primeiraTurma = Model.AlunoTurmas.FirstOrDefault();
+    string nomeTurma = primeiraTurma != null ? primeiraTurma.Turma : "";
+
+    ViewData["Title"] = "Alunos da Turma: " + nomeTurma;
+}
+
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-primary" role="button" asp-page="/Turmas/Listar">Voltar</a>
+    </div>
+
+    <h1>Alunos da Turma: @nomeTurma</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id Aluno</th>
+                <th>Nome</th>
+                <th>Usuário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alunoTurma in Model.AlunoTurmas)
+            {
+                <tr>
+                    <td>@alunoTurma.IdAluno</td>
+                    <td>@alunoTurma.Nome</td>
+                    <td>@alunoTurma.Usuario</td>
+                    <td>
+                        <form method="post" asp-page-handler="Inativar" asp-route-id="@alunoTurma.IdAluno">
+                            <button type="submit" class="btn btn-danger">Inativar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

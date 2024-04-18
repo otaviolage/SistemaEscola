@@ -10,6 +10,7 @@ namespace SistemaEscola.Domain.DependencyInjection
         {
             services.AddScoped<IAlunoService, AlunoService>();
             services.AddScoped<ITurmaService, TurmaService>();
+            services.AddScoped<IAlunoTurmaService, AlunoTurmaService>();
 
             return services;
         }

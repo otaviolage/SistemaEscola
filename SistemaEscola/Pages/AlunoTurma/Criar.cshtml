@@ -1,0 +1,49 @@
+﻿@page
+@model CriarAlunoTurmaModel
+@{
+    ViewData["Title"] = "Criar AlunoTurma";
+}
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <a class="btn btn-primary" role="button" asp-page="/AlunoTurmas/Listar">Voltar</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col">
+            <h1>Criar AlunoTurma</h1>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="alunoId">Aluno:</label>
+                    <select id="alunoId" name="AlunoTurma.AlunoId" class="form-control">
+                        <option value="">Selecione o aluno</option>
+                        @foreach (var aluno in Model.Alunos)
+                        {
+                            <option value="@aluno.Id">@aluno.Nome</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="turmaId">Turma:</label>
+                    <select id="turmaId" name="AlunoTurma.TurmaId" class="form-control">
+                        <option value="">Selecione a turma</option>
+                        @foreach (var turma in Model.Turmas)
+                        {
+                            <option value="@turma.Id">@turma.Turma</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@ namespace SistemaEscola.Domain.DTOs
             {
                 Nome = aluno.Nome,
                 Usuario = aluno.Usuario,
-                Senha = aluno.Senha.ToSHA256Hash()
+                Senha = aluno.Senha
             };
     }
 }

@@ -21,6 +21,13 @@ namespace SistemaEscola.Infrastructure.Repositories
             return await _dataContext.GetAllAsync<TurmaDTO>(query, default, System.Data.CommandType.Text);
         }
 
+        public async Task<IEnumerable<TurmaIdentificationDTO>> GetAllIdentifications()
+        {
+            string query = @$"SELECT Turma FROM Turma";
+
+            return await _dataContext.GetAllAsync<TurmaIdentificationDTO>(query, default, System.Data.CommandType.Text);
+        }
+
         public async Task<bool> Add(TurmaDTO turma)
         {
             string query = @"INSERT INTO Turma (CursoId, Turma, Ano) VALUES (@CursoId, @Turma, @Ano)";

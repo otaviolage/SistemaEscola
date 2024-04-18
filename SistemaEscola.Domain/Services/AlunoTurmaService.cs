@@ -22,7 +22,11 @@ namespace SistemaEscola.Domain.Services
 
         public async Task<bool> Add(AlunoTurmaDTO alunoTurma)
         {
-            // validar campos
+            var alunos = await GetAllByTurmaId(alunoTurma.TurmaId);
+
+            //Requisito: Sistema nao pode permitir o mesmo Aluno relacionado na mesma Turma duas vezes.
+            if (alunos.Any(x => x.IdAluno == alunoTurma.AlunoId))
+                return false;
 
             var result = await _alunoTurmaRepository.Add(alunoTurma);
 

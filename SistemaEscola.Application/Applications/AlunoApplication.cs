@@ -2,6 +2,7 @@ using SistemaEscola.Domain.DTOs;
 using SistemaEscola.Domain.Interfaces.Applications;
 using SistemaEscola.Domain.Interfaces.Services;
 using SistemaEscola.Domain.Models.Alunos;
+using SistemaEscola.Domain.Utils;
 
 namespace SistemaEscola.Application.Applications
 {

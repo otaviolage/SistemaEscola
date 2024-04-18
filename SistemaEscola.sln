@@ -23,6 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaEscola.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaEscola.Tests", "SistemaEscola.Tests\SistemaEscola.Tests.csproj", "{5953347E-89C0-413F-B4B1-AC3B8194EC4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Files", "5 - Files", "{918BF789-D260-4AB3-9935-1E9316D145B3}"
+	ProjectSection(SolutionItems) = preProject
+		Queries.sql = Queries.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

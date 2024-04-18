@@ -22,7 +22,15 @@ namespace SistemaEscola.Domain.Services
 
         public async Task<bool> Add(TurmaDTO turma)
         {
-            // validar campos
+            var turmas = await _turmaRepository.GetAll();
+
+            // Requisito: Sistema nao pode permitir Turmas com o mesmo nome (coluna turma no diagrama).
+            if (turmas.Any(x => x.Turma == turma.Turma))
+                return false;
+
+            // Requisito: Sistema nao pode permitir criar Turmas com datas anteriores da atual.
+            if (turma.Ano < DateTime.Now.Year)
+                return false;
 
             var result = await _turmaRepository.Add(turma);
 

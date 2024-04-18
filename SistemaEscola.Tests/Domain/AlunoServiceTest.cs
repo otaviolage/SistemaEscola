@@ -41,5 +41,64 @@ namespace SistemaEscola.Tests.Domain
 
             _mockAlunoRepository.Verify(x => x.GetAll(), Times.Once);
         }
+
+        [Fact]
+        public void Add_ShouldCreateAluno()
+        {
+            var aluno = _factory.Create<AlunoDTO>();
+
+            aluno.Senha = "@1234AAbbCC";
+
+            var hasCreated = true;
+
+            _mockAlunoRepository.Setup(x => x.Add(
+                    It.IsAny<AlunoDTO>()))
+                .ReturnsAsync(hasCreated);
+
+            var result = _alunoService.Add(aluno).Result;
+
+            Assert.Equal(hasCreated, result);
+
+            _mockAlunoRepository.Verify(x => x.Add(It.IsAny<AlunoDTO>()), Times.Once);
+            _mockAlunoRepository.Verify(x => x.Add(aluno), Times.Once);
+        }
+
+        [Fact]
+        public void Add_ShouldNotCreateAlunoWithWeakPassword()
+        {
+            var aluno = _factory.Create<AlunoDTO>();
+
+            aluno.Senha = "123";
+
+            var hasCreated = false;
+
+            _mockAlunoRepository.Setup(x => x.Add(
+                    It.IsAny<AlunoDTO>()))
+                .ReturnsAsync(hasCreated);
+
+            var result = _alunoService.Add(aluno).Result;
+
+            Assert.Equal(hasCreated, result);
+
+            _mockAlunoRepository.Verify(x => x.Add(It.IsAny<AlunoDTO>()), Times.Never);
+        }
+
+        [Fact]
+        public void Delete_ShouldDeleteAluno()
+        {
+            var id = _factory.Create<int>();
+            var hasDeleted = true;
+
+            _mockAlunoRepository.Setup(x => x.Delete(
+                    It.IsAny<int>()))
+                .ReturnsAsync(hasDeleted);
+
+            var result = _alunoService.Delete(id).Result;
+
+            Assert.Equal(hasDeleted, result);
+
+            _mockAlunoRepository.Verify(x => x.Delete(It.IsAny<int>()), Times.Once);
+            _mockAlunoRepository.Verify(x => x.Delete(id), Times.Once);
+        }
     }
 }

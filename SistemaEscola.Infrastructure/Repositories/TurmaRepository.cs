@@ -5,37 +5,37 @@ using SistemaEscola.Infrastructure.Interfaces.Contexts;
 
 namespace SistemaEscola.Infrastructure.Repositories
 {
-    public class AlunoRepository : IAlunoRepository
+    public class TurmaRepository : ITurmaRepository
     {
         private readonly IDataContext _dataContext;
 
-        public AlunoRepository(IDataContext dataContext)
+        public TurmaRepository(IDataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-        public async Task<IEnumerable<AlunoDTO>> GetAll()
+        public async Task<IEnumerable<TurmaDTO>> GetAll()
         {
-            string query = @$"SELECT Id, Nome, Usuario FROM Aluno";
+            string query = @$"SELECT Id, CursoId, Turma, Ano FROM Turma";
 
-            return await _dataContext.GetAllAsync<AlunoDTO>(query, default, System.Data.CommandType.Text);
+            return await _dataContext.GetAllAsync<TurmaDTO>(query, default, System.Data.CommandType.Text);
         }
 
-        public async Task<bool> Add(AlunoDTO aluno)
+        public async Task<bool> Add(TurmaDTO turma)
         {
-            string query = @"INSERT INTO Aluno (Nome, Usuario, SenhaHash) VALUES (@Nome, @Usuario, @SenhaHash)";
+            string query = @"INSERT INTO Turma (CursoId, Turma, Ano) VALUES (@CursoId, @Turma, @Ano)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@Nome", aluno.Nome);
-            parameters.Add("@Usuario", aluno.Usuario);
-            parameters.Add("@SenhaHash", aluno.Senha);
+            parameters.Add("@CursoId", turma.CursoId);
+            parameters.Add("@Turma", turma.Turma);
+            parameters.Add("@Ano", turma.Ano);
 
             return await _dataContext.ExecuteAsync(query, parameters);
         }
 
         public async Task<bool> Delete(int id)
         {
-            string query = @"DELETE Aluno WHERE Id = @Id";
+            string query = @"DELETE Turma WHERE Id = @Id";
 
             var parameters = new DynamicParameters();
             parameters.Add("@Id", id);

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaEscola.Domain.Interfaces.Applications;
 using SistemaEscola.Domain.Models.Alunos;
 
-namespace SistemaEscola.Pages
+namespace SistemaEscola.Pages.Alunos
 {
     public class CriarAluno : PageModel
     {
@@ -21,7 +21,7 @@ namespace SistemaEscola.Pages
             if (!hasCreated)
                 return RedirectToPage("/ErroRequisicao");
 
-            return RedirectToPage("/Aluno");
+            return RedirectToPage("/Alunos/Listar");
         }
     }
 }

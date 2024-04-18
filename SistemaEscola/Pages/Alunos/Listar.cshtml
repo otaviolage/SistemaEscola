@@ -1,0 +1,79 @@
+﻿@page
+@model Aluno
+@{
+    ViewData["Title"] = "Alunos";
+}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+</style>
+
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-primary" role="button" asp-page="/Alunos/Criar">Novo Aluno</a>
+    </div>
+
+    <h1>Alunos</h1>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Alunos.Any())
+            {
+                foreach (var aluno in Model.Alunos)
+                {
+                    <tr>
+                        <td>@aluno.Id</td>
+                        <td>@aluno.Nome</td>
+                        <td>@aluno.Usuario</td>
+                        <td>
+                            <form method="post" asp-page-handler="Inativar" asp-route-id="@aluno.Id">
+                                <button type="submit" class="btn btn-danger">Inativar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

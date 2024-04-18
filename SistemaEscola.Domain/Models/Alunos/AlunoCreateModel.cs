@@ -1,6 +1,4 @@
-﻿using SistemaEscola.Domain.DTOs;
-
-namespace SistemaEscola.Domain.Models.Alunos
+﻿namespace SistemaEscola.Domain.Models.Alunos
 {
     public class AlunoCreateModel
     {

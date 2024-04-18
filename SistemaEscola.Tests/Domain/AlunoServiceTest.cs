@@ -4,11 +4,11 @@ using SistemaEscola.Domain.DTOs;
 using SistemaEscola.Domain.Interfaces.Repositories;
 using SistemaEscola.Domain.Services;
 
-namespace SistemaEscola.Tests.Domain.Services
+namespace SistemaEscola.Tests.Domain
 {
     public class AlunoServiceTest
     {
-        private readonly AlunoService _orderService;
+        private readonly AlunoService _alunoService;
         private readonly Mock<IAlunoRepository> _mockAlunoRepository;
         private readonly Fixture _factory = new();
 
@@ -16,7 +16,7 @@ namespace SistemaEscola.Tests.Domain.Services
         {
             _mockAlunoRepository = new();
 
-            _orderService = new(_mockAlunoRepository.Object);
+            _alunoService = new(_mockAlunoRepository.Object);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace SistemaEscola.Tests.Domain.Services
             _mockAlunoRepository.Setup(x => x.GetAll())
                 .ReturnsAsync(listaDeAlunos);
 
-            var result = _orderService.GetAll().Result;
+            var result = _alunoService.GetAll().Result;
 
             Assert.Equal(listaDeAlunos.Count(), result.Count());
 

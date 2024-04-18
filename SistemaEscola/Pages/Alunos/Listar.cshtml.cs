@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaEscola.Domain.Interfaces.Applications;
 
-namespace SistemaEscola.Pages
+namespace SistemaEscola.Pages.Alunos
 {
     public class Aluno : PageModel
     {

@@ -27,11 +27,12 @@
     .form-group {
         margin-bottom: 20px;
     }
+
 </style>
 
 <div class="container">
     <div style="margin-bottom: 20px;">
-        <a class="btn btn-primary" role="button" asp-page="/Aluno">Voltar</a>
+        <a class="btn btn-primary" role="button" asp-page="/Alunos/Listar">Voltar</a>
     </div>
 
     <h1>Criar Aluno</h1>
@@ -50,7 +51,7 @@
             <input type="password" id="CriarAluno.Senha" name="senha" class="form-control" />
             <small id="senhaHelp" class="form-text text-muted">A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.</small>
         </div>
-        <button type="submit" class="btn btn-primary" asp-page-handler="OnGet">Cadastrar</button>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
 

@@ -1,6 +1,5 @@
-﻿
-using SistemaEscola.Domain.Models;
-using SistemaEscola.Domain.Models.Alunos;
+﻿using SistemaEscola.Domain.Models.Alunos;
+using SistemaEscola.Domain.Utils;
 
 namespace SistemaEscola.Domain.DTOs
 {

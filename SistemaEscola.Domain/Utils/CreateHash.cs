@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SistemaEscola.Domain.Models
+namespace SistemaEscola.Domain.Utils
 {
     public static class CreateHash
     {

@@ -1,0 +1,55 @@
+﻿@page
+@model CriarTurma
+@{
+    ViewData["Title"] = "TurmasCriar";
+}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-primary" role="button" asp-page="/Turmas/Listar">Voltar</a>
+    </div>
+
+    <h1>Criar Turma</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="cursoId">Id Curso:</label>
+            <input type="number" id="cursoId" name="turma.CursoId" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="turma">Turma:</label>
+            <input type="text" id="turma" name="turma.Turma" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="ano">Ano:</label>
+            <input type="number" id="ano" name="turma.Ano" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>

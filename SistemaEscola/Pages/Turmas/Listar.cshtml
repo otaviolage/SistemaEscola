@@ -1,7 +1,7 @@
 ﻿@page
-@model Aluno
+@model Turma
 @{
-    ViewData["Title"] = "Alunos";
+    ViewData["Title"] = "Turmas";
 }
 
 <style>
@@ -43,31 +43,33 @@
 
 <div class="container">
     <div style="margin-bottom: 20px;">
-        <a class="btn btn-primary" role="button" asp-page="/CriarAluno">Novo Aluno</a>
+        <a class="btn btn-primary" role="button" asp-page="/Turmas/Criar">Nova Turma</a>
     </div>
 
-    <h1>Alunos</h1>
+    <h1>Turmas</h1>
 
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Usuário</th>
+                <th scope="col">Id Curso</th>
+                <th scope="col">Turma</th>
+                <th scope="col">Ano</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
-            @if (Model != null && Model.Alunos.Any())
+            @if (Model != null && Model.Turmas.Any())
             {
-                foreach (var aluno in Model.Alunos)
+                foreach (var turma in Model.Turmas)
                 {
                     <tr>
-                        <td>@aluno.Id</td>
-                        <td>@aluno.Nome</td>
-                        <td>@aluno.Usuario</td>
+                        <td>@turma.Id</td>
+                        <td>@turma.CursoId</td>
+                        <td>@turma.Turma</td>
+                        <td>@turma.Ano</td>
                         <td>
-                            <form method="post" asp-page-handler="Inativar" asp-route-id="@aluno.Id">
+                            <form method="post" asp-page-handler="Inativar" asp-route-id="@turma.Id">
                                 <button type="submit" class="btn btn-danger">Inativar</button>
                             </form>
                         </td>
